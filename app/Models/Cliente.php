@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+
+class Cliente extends Model
+{
+    use HasFactory;
+    protected $table = 'cliente';
+
+    protected $fillable = [
+        
+        'email',
+        'name',
+        'identificacion',
+        'edad',
+        'ciudad',
+        'telefono',
+        'estado',
+        'mascota',
+        'nombre_mascota',
+        'cumpleanos_m',
+        'raza',
+
+        // Agrega otras columnas aquí según sea necesario
+    ];
+
+    public function usuario()
+    {
+        return $this->hasOne(User::class, 'id_usuario');
+    }
+}
