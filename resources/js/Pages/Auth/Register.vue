@@ -258,7 +258,7 @@ const loadPayPalScript = async () => {
 
         // Cargar el script de PayPal después de que se resuelva la petición Fetch
         const script = document.createElement('script');
-        const clientID = "AWYsjsI2pdoOKJvSYp2bNNB7JSqxFPkChmwssMUwFvO_JGgZ_yMRAgZPmsA_bblbTgnjBYnHrQQK4ZWL";
+        const clientID = "AS6a9o5E4iay_fW-DBdyEOZhB7MgVTTDwa6mPib1oTS2ObXg4UL8744OR2L0Z-7GzxG7bISWf5_3W8SA";
         console.log(precioEnUSD.value + " " + typeof (precioEnUSD.value));
         script.src = `https://www.paypal.com/sdk/js?client-id=${clientID}&currency=USD`;
         script.onload = () => {
