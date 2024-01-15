@@ -129,7 +129,7 @@ class ProfileController extends Controller
         ]); 
 
         Mail::to($user->email)->send(new AprobadoNotificacion($user));
-        return Redirect::to('/');
+        return redirect()->back()->with('success', 'Correo enviado con exito');
 
     }
 
@@ -153,7 +153,7 @@ class ProfileController extends Controller
         $user->save();
 
         
-        Mail::to($user->email)->send(new AprobadoNotificacion($call));
+        Mail::to($user->email)->send(new AprobadoNotificacion($user));
         return Redirect::to('/');
     }
 

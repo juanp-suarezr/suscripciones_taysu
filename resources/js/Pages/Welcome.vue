@@ -66,7 +66,9 @@ for (let index in roles) {
 
 onMounted(() => {
     const script = document.createElement('script');
-    script.src = 'https://cdn.lightwidget.com/widgets/lightwidget.js';
+    script.src = 'https://static.elfsight.com/platform/platform.js';
+    script.setAttribute('data-use-service-core', ''); // Agrega el atributo data-use-service-core
+    script.defer = true; // Agrega el atributo defer
     document.head.appendChild(script);
 });
 
@@ -287,8 +289,8 @@ onMounted(() => {
         </h2>
 
         <!-- LightWidget WIDGET -->
-        <iframe src="//lightwidget.com/widgets/d7ea71a8e7fc5da9a4d3c97aeeec8571.html" scrolling="no"
-            allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:auto;"></iframe>
+
+        <div class="elfsight-app-8c598639-397d-43a0-a4d3-5e7ec89cd491" data-elfsight-app-lazy></div>
 
 
     </div>
@@ -312,9 +314,10 @@ onMounted(() => {
                     <h2 class="inline-block px-3 py-2 mt-5 font-bold tracking-wide text-gray-800 uppercase md:mt-0">
                         100% Pereiranos y sostenibles
                     </h2>
-                    <p class="inline-block px-3 py-2 text-gray-600">Orgullosos de nuestra tierra y de cuidar el medio ambiente</p>
+                    <p class="inline-block px-3 py-2 text-gray-600">Orgullosos de nuestra tierra y de cuidar el medio
+                        ambiente</p>
                 </div>
-                
+
                 <div class="flex flex-col w-full text-gray-700">
                     <div class="inline-block px-3 py-2 mt-5 font-bold text-gray-800 uppercase md:mt-0">
                         Siguenos o escribenos

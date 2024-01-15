@@ -58,11 +58,11 @@
             </nav-link>
 
             <!-- ROL ADMIN -->
-            <nav-link v-if="$page.props.auth.user.id_rol != estudianteID && $page.props.auth.user.id_rol != monitorID"
+            <!-- <nav-link v-if="$page.props.auth.user.id_rol != estudianteID && $page.props.auth.user.id_rol != monitorID"
                 :href="route('cliente.index')" :active="route().current('cliente.index')" class="hover:bg-gray-200">
                 <i class="fa-solid fa-circle-info"></i>
                 Información usuarios
-            </nav-link>
+            </nav-link> -->
 
 
         </nav>
