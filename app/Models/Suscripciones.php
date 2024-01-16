@@ -19,6 +19,8 @@ class Suscripciones extends Model
         'id_cliente',
         'fecha_vencimiento',
         'precio',
+        'updated_at',
+        'created_at',
         
         
     ];

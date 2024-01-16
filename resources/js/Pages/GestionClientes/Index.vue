@@ -71,17 +71,17 @@
                             <p class="text-gray-900 whitespace-no-wrap">{{ user.telefono }}</p>
                         </td>
                         <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                            <p class="text-gray-900 whitespace-no-wrap">
+                            
                                 <p class="text-gray-900 whitespace-no-wrap">{{ user.identificacion }}</p>
-                            </p>
+                            
                         </td>
                         <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
                             <Link @click="edit(user.id)"
-                                class="bg-cyan-600 md:mr-3 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg">
+                                class="bg-cyan-600 md:mr-3 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg" v-if="user.estado != 'aprobado'">
                             Aprobar</Link>
 
                             <Link @click="edit1(user.id)"
-                                class="bg-cyan-600 md:mr-3 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg">
+                                class="bg-cyan-600 md:mr-3 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg" v-if="user.estado == 'aprobado'">
                             Denegar</Link>
                         </td>
                     </tr>
@@ -114,7 +114,7 @@ import { ref, computed, watch } from 'vue';
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
-import calificar from "@/components/calificacion.vue";
+
 
 import { useToast } from 'vue-toast-notification';
 

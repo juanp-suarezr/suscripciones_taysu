@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use DB;
 
-class GestionTutoresController extends Controller
+class GestionClientesController extends Controller
 {
 
     public function index(Request $request)
     {
         
-        return Inertia::render('GestionTutores/Index', [
+        return Inertia::render('GestionClientes/Index', [
             'users' => Cliente::all()
         ]);
     }

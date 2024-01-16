@@ -100,7 +100,7 @@ class ProfileController extends Controller
         return Redirect('/profile?id=' . urlencode($request->input('id')) . '&originPage=' . urlencode($originPage))->with('success', 'Perfil actualizado exitosamente.');
     }
 
-    /** EDIT ESTADO TUTOR 
+    /** EDIT ESTADO CLIENTE -- APROBADO
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -109,7 +109,8 @@ class ProfileController extends Controller
     {
 
         $user = Cliente::find($id);
-
+        
+        
         // Verificar que se encontró el usuario
         if (!$user) {
             // Manejar el caso donde el usuario no se encuentra
@@ -121,12 +122,23 @@ class ProfileController extends Controller
 
         $fechaVencimiento = Carbon::now()->addYear();
 
-        $suscripcion = Suscripciones::create([
-            'id_cliente' => $user->id,
-            'fecha_vencimiento' => $fechaVencimiento,
-            'precio' => 180000,
+        
+        $suscripcionNow = Suscripciones::where('id_cliente', $user->id)->first();
+        
+
+        if (!$suscripcionNow) {
+
+            $suscripcion = Suscripciones::create([
+                'id_cliente' => $user->id,
+                'fecha_vencimiento' => $fechaVencimiento,
+                'precio' => 180000,
+                
+            ]);
+
             
-        ]); 
+
+        } 
+
 
         Mail::to($user->email)->send(new AprobadoNotificacion($user));
         return redirect()->back()->with('success', 'Correo enviado con exito');
@@ -154,7 +166,7 @@ class ProfileController extends Controller
 
         
         Mail::to($user->email)->send(new AprobadoNotificacion($user));
-        return Redirect::to('/');
+        return redirect()->back()->with('success', 'Correo enviado con exito');
     }
 
     /**

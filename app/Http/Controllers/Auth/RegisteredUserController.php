@@ -61,6 +61,31 @@ class RegisteredUserController extends Controller
             
             // Agrega cualquier otro campo necesario aquí
         ]);
+
+        if ($cliente->estado == 'aprobado') {
+            
+            $fechaVencimiento = Carbon::now()->addYear();
+
+        
+            $suscripcionNow = Suscripciones::where('id_cliente', $user->id)->first();
+        
+
+            if (!$suscripcionNow) {
+
+                $suscripcion = Suscripciones::create([
+                    'id_cliente' => $user->id,
+                    'fecha_vencimiento' => $fechaVencimiento,
+                    'precio' => 180000,
+                
+                ]);
+
+            } 
+
+
+            Mail::to($user->email)->send(new AprobadoNotificacion($user));
+            return redirect()->back()->with('success', 'Correo enviado con exito');
+
+        }
     
         
         return Redirect::route('register')->with('message', true);

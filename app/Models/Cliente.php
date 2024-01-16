@@ -28,8 +28,4 @@ class Cliente extends Model
         // Agrega otras columnas aquí según sea necesario
     ];
 
-    public function usuario()
-    {
-        return $this->hasOne(User::class, 'id_usuario');
-    }
 }

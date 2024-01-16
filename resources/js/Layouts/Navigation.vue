@@ -24,7 +24,7 @@
 
             </nav-link>
 
-            <nav-link :href="route('dashboard')" :active="route().current('dashboard')" class="hover:bg-gray-200">
+            <nav-link :href="route('cumpleaños')" :active="route().current('cumpleaños')" class="hover:bg-gray-200">
 
                 <i class="fa-solid fa-cake-candles"></i>
                 Cumpleaños mascota

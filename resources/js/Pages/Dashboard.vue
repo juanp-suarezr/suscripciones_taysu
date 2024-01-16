@@ -44,11 +44,10 @@
                 </div>
             </div>
             <!-- VISTA ADMIN -->
-            <div
-                class="py-4 justify-center items-center">
+            <div class="py-4 justify-center items-center">
                 <div class="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-2">
-                    
-                    
+
+
                     <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                         <div
                             class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-yellow-900 to-yellow-600 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
@@ -59,8 +58,8 @@
                                 Total suscripciones
                             </p>
                             <h4
-                                class="block antialiased tracking-normal font-sans text-xl text-xs md:text-xl sm:text-base font-semibold leading-snug text-blue-gray-900 lg:mt-4">
-                                {{  }}
+                                class="block antialiased tracking-normal font-sans text-xs md:text-xl sm:text-base font-semibold leading-snug text-blue-gray-900 lg:mt-4">
+                                {{ suscripciones.length }}
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -84,8 +83,8 @@
                                 META de suscripciones
                             </p>
                             <h4
-                                class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
-                                
+                                class="block antialiased tracking-normal font-sans text-xs md:text-xl sm:text-base font-semibold leading-snug text-blue-gray-900 lg:mt-4">
+                                15
                             </h4>
                         </div>
                         <div class="border-t border-blue-gray-50 p-4">
@@ -96,8 +95,8 @@
                     </div>
                 </div>
             </div>
-            
-            
+
+
         </div>
 
         <!-- VISTA ADMIN -->
@@ -129,32 +128,33 @@
                                 class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
                                 Fecha vencimiento
                             </th>
-                            <th
-                                class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
-                                estado
-                            </th>
 
-                            
+
+
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="user in slicedSuscripciones" :key="user.id" class="text-gray-700">
-                            <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                                <p class="text-gray-900 whitespace-no-wrap">{{ user.name }}</p>
-                            </td>
-                            <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                                <p class="text-gray-900 whitespace-no-wrap">{{ user.email }}</p>
-                            </td>
-                            
+                        <tr v-for="sub in slicedSuscripciones" :key="sub.id" class="text-gray-700">
                             <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
                                 <p class="text-gray-900 whitespace-no-wrap">
-                                    <calificar :calificacion="user.calificacion" />
+                                    {{ clientes.find(item => item.id == sub.id_cliente)?.name ||
+                                        'Desconocido' }}
                                 </p>
                             </td>
                             <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                                <p class="text-gray-900 whitespace-no-wrap">{{ user.agendamientos_count }}</p>
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                    {{ clientes.find(item => item.id == sub.id_cliente)?.nombre_mascota ||
+                                        'Desconocido' }}
+                                </p>
                             </td>
-                            
+
+                            <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
+
+                                <p class="text-gray-900 whitespace-no-wrap">{{ sub.fecha_vencimiento }}</p>
+
+                            </td>
+
+
                         </tr>
                     </tbody>
                 </table>
@@ -163,9 +163,9 @@
                     class="flex items-center border-b bg-gray-50 px-5 py-2 xs:flex-row justify-between text-gray-500 text-xs font-semibold">
                     <button class="hover:scale-125 transition duration-500 cursor-pointer" @click="previousPage"
                         :disabled="currentPage === 0"><i class="fa-solid fa-arrow-left"></i></button>
-                    <p>Pagina {{ currentPage + 1 }} de {{ totalPages2 }}</p>
-                    <button class="hover:scale-125 transition duration-500 cursor-pointer" @click="nextPage2"
-                        :disabled="currentPage === totalPages2 - 1"><i class="fa-solid fa-arrow-right"></i></button>
+                    <p>Pagina {{ currentPage + 1 }} de {{ totalPages }}</p>
+                    <button class="hover:scale-125 transition duration-500 cursor-pointer" @click="nextPage"
+                        :disabled="currentPage === totalPages - 1"><i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
 
@@ -191,17 +191,47 @@ import 'aos/dist/aos.css';
 
 AOS.init();
 
-const estudianteID = ref(localStorage.getItem("estudianteID"));
-const monitorID = ref(localStorage.getItem("monitorID"));
-const agendar = usePage().props.agendar;
-const agendaTutor = usePage().props.agendaTutor;
 
-const actualCalificacion = ref(0);
-const topMonitor = ref('');
-const agendarVista = ref([]);
-const agendarVistaTutor = ref([]);
+const clientes = usePage().props.clientes;
+const suscripciones = usePage().props.suscripciones;
 
 console.log(usePage().props);
+
+//SEARCH 
+const searchTerm = ref('');
+
+//paginacion tutores
+const itemsPerPage = 5;
+const currentPage = ref(0);
+
+const totalPages = computed(() => Math.ceil(suscripciones.length / itemsPerPage));
+
+const slicedSuscripciones = computed(() => {
+    const start = currentPage.value * itemsPerPage;
+    const end = start + itemsPerPage;
+    const filteredUsers = suscripciones.filter(sub =>
+        clientes.find(item => item.id == sub.id_cliente)?.name.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+        clientes.find(item => item.id == sub.id_cliente)?.nombre_mascota.toLowerCase().includes(searchTerm.value.toLowerCase())
+    );
+    return filteredUsers.slice(start, end);
+});
+
+const previousPage = () => {
+    if (currentPage.value > 0) {
+        currentPage.value--;
+    }
+};
+
+const nextPage = () => {
+    if (currentPage.value < totalPages.value - 1) {
+        currentPage.value++;
+    }
+};
+//FIN Paginacion
+
+
+
+
 
 
 

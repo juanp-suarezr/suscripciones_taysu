@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\materiasController;
 use App\Http\Controllers\agendarController;
 use App\Http\Controllers\disponibilidadController;
-use App\Http\Controllers\GestionTutoresController;
+use App\Http\Controllers\GestionClientesController;
 use App\Http\Controllers\calificarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Roles;
 use App\Models\User;
+use App\Models\Suscripciones;
 use App\Models\Cliente;
 use App\Models\Disponibilidad;
 use App\Models\Agendar;
@@ -45,11 +46,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
 
     
-    $clientes = Cliente::all();
+    $clientes = Cliente::where('estado', 'aprobado')->get();
+    $suscripciones = Suscripciones::all();
 
     return Inertia::render('Dashboard', [
         'clientes' => $clientes,
-        
+        'suscripciones' => $suscripciones,
 
 
         
@@ -63,13 +65,14 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     
+    Route::get('/cumpleaños', fn () => Inertia::render('Cumpleaños', ['users' => Cliente::where('estado', 'aprobado')->get()]))->name('cumpleaños');
     
     Route::get('users', [UserController::class, 'index'])->name('users.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('aprobar', [GestionTutoresController::class, 'index'])->name('aprobar.index');
+    Route::get('aprobar', [GestionClientesController::class, 'index'])->name('aprobar.index');
     //UPDATE ESTADO CLIENTE
     Route::patch('/aprobar/{id}', [ProfileController::class, 'change'])->name('profile.change');
     //REPROBAR ESTADO CLIENTE

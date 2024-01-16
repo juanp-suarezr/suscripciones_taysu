@@ -121,7 +121,7 @@ onMounted(() => {
     <div class="md:hidden w-auto mt-2 grid grid-cols-2 gap-4 mx-4">
         <Link :href="route('login')"
             class="relative md:mr-3 z-40 inline-block w-auto h-full px-2 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-yellow-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">
-        Iniciar Sesion</Link>
+            Admin</Link>
 
         <Link :href="route('register')"
             class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-yellow-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">
