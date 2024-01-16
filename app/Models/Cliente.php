@@ -18,6 +18,7 @@ class Cliente extends Model
         'identificacion',
         'edad',
         'ciudad',
+        'direccion',
         'telefono',
         'estado',
         'mascota',

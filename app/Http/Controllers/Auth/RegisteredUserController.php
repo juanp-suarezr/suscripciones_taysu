@@ -53,6 +53,7 @@ class RegisteredUserController extends Controller
             'identificacion' => $request->identificacion,
             'edad' => $request->edad,
             'ciudad' => $request->ciudad,
+            'direccion' => $request->direccion,
             'telefono' => $request->telefono,
             'mascota' => $request->mascota,
             'nombre_mascota' => $request->nombre_mascota,

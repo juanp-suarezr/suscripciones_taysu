@@ -38,6 +38,13 @@
                 </div>
 
                 <div class="mt-2">
+                    <InputLabel for="direccion" value="Dirección" />
+                    <TextInput id="direccion" type="text" class="mt-1 block w-full" v-model="form.direccion" required autofocus
+                        autocomplete="direccion" />
+                    <InputError class="mt-2" :message="form.errors.direccion" />
+                </div>
+
+                <div class="mt-2">
                     <InputLabel for="telefono" value="telefono" />
                     <TextInput id="telefono" type="text" class="mt-1 block w-full" v-model="form.telefono" required
                         autofocus autocomplete="telefono" />
@@ -153,6 +160,7 @@ const form = useForm({
     identificacion: "",
     edad: "",
     ciudad: "",
+    direccion: "",
     telefono: "",
     mascota: "perro, gato, conejo, etc.",
     nombre_mascota: "",
