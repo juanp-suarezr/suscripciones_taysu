@@ -44,26 +44,6 @@ if (document.getElementById("nav-mobile-btn")) {
 }
 
 
-const estudianteID = ref();
-const monitorID = ref();
-const roles = usePage().props.roles;
-console.log(roles);
-
-for (let index in roles) {
-
-    if (roles[index].name == "Estudiante") {
-        estudianteID.value = roles[index].id;
-    }
-    else if (roles[index].name == "Monitor") {
-        monitorID.value = roles[index].id;
-    }
-
-    localStorage.setItem('estudianteID', estudianteID.value);
-    localStorage.setItem('monitorID', monitorID.value);
-
-
-}
-
 onMounted(() => {
     const script = document.createElement('script');
     script.src = 'https://static.elfsight.com/platform/platform.js';

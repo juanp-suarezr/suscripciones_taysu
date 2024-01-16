@@ -19,8 +19,6 @@ defineProps({
     }
 });
 
-const estudianteID = ref(localStorage.getItem("estudianteID"));
-const monitorID = ref(localStorage.getItem("monitorID"));
 
 const user = ref({});
 const userInfo = usePage().props.updatedUser;
@@ -42,7 +40,8 @@ if (usePage().props.originPage == "UsuariosEdit") {
 
     });
 
-} else if (usePage().props.originPage == "perfilEdit") {
+} else if (usePage().props.originPage == "clienteEdit") {
+    
     user.value = usePage().props.informacion_usuarioID;
     console.log(user.value);
     form.value = useForm({
@@ -54,36 +53,6 @@ if (usePage().props.originPage == "UsuariosEdit") {
         facultad: user.value.data[0].facultad,
         semestre: user.value.data[0].semestre,
     });
-} else {
-    if (usePage().props.auth.user.id_rol != estudianteID && usePage().props.auth.user.id_rol != monitorID) {
-        user.value = usePage().props.informacion_usuarioXAdmin;
-        console.log(usePage().props);
-        console.log(user.value);
-        form.value = useForm({
-            name: user.value.data[0].name,
-            email: user.value.data[0].email,
-            identificacion: user.value.data[0].identificacion,
-            edad: user.value.data[0].edad,
-            ciudad: user.value.data[0].ciudad,
-            facultad: user.value.data[0].facultad,
-            semestre: user.value.data[0].semestre,
-
-        });
-
-    } else {
-        user.value = usePage().props.informacion_usuarioID;
-        console.log(user.value);
-        form.value = useForm({
-            name: user.value.data[0].name,
-            email: user.value.data[0].email,
-            identificacion: user.value.data[0].identificacion,
-            edad: user.value.data[0].edad,
-            ciudad: user.value.data[0].ciudad,
-            facultad: user.value.data[0].facultad,
-            semestre: user.value.data[0].semestre,
-
-        });
-    }
 
 }
 

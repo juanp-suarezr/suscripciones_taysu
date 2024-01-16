@@ -7,7 +7,7 @@
         </template>
 
         <div class="mb-4 inline-flex w-full overflow-hidden rounded-lg bg-white shadow-md">
-            <div class="flex w-16 items-center justify-center bg-blue-500">
+            <div class="flex w-16 items-center justify-center bg-yellow-200">
                 <i class="fa-solid fa-circle-info text-xl"></i>
             </div>
 
@@ -40,31 +40,34 @@
 
                         <th
                             class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
-                            Nombre
+                            Nombre - Correo
                         </th>
 
                         <th
                             class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
                             Identificación
                         </th>
-                        <th
-                            class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
-                            Correo
-                        </th>
-                        <th
-                            class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
-                            Edad
-                        </th>
+                        
                         <th
                             class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
                             Ciudad
                         </th>
                         <th
                             class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
-                            Facultad
+                            Dirección
+                        </th>
+
+                        <th
+                            class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
+                            nombre Mascota
+                        </th>
+
+                        <th
+                            class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
+                            Cantidad <br> pañoletas
                         </th>
                         
-                        <th
+                        <th colspan="2"
                             class="border-b-2 border-gray-200 bg-gray-100 sm:px-5 sm:py-3 p-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">
                             Acciones
                         </th>
@@ -74,32 +77,35 @@
                 <tbody>
                     <tr v-for="informacion_usuario in slicedInfoUsers" :key="informacion_usuario.id" class="text-gray-700">
                         <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                            <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.name }}</p>
+                            <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.name }} <br> {{ informacion_usuario.email }}</p>
                         </td>
                         <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
                             <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.identificacion }}</p>
                         </td>
-                        <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                            <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.email }}</p>
-                        </td>
-                        <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                            <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.edad }}</p>
-                        </td>
+                        
                         <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
                             <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.ciudad }}</p>
                         </td>
                         <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                            <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.facultad }}</p>
+                            <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.direccion }}</p>
                         </td>
-                        <td class="flex-row border-b border-gray-200 bg-white sm:px-5 sm:py-5 sm:text-sm text-xs">
+                        <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
+                            <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.nombre_mascota }}</p>
+                        </td>
+                        <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
+                            <p class="text-gray-900 whitespace-no-wrap">{{ informacion_usuario.num_pañoletas }}</p>
+                        </td>
+                        <td colspan="2" class="flex-row border-b border-gray-200 bg-white sm:px-5 sm:py-5 sm:text-sm text-xs">
+                            
                             <Link
                                 :href="route('profile.edit', { id: informacion_usuario.id_usuario, originPage: 'clienteEdit' })"
-                                class="bg-cyan-600 md:mr-2 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-blue-600 rounded-lg">
+                                class="bg-red-300 md:mr-2 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-blue-600 rounded-lg">
+                            -></Link>
+                            <Link
+                                :href="route('profile.edit', { id: informacion_usuario.id, originPage: 'clienteEdit' })"
+                                class="bg-yellow-600 md:mr-2 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-blue-600 rounded-lg">
                             Editar</Link>
-
-                            <Link @click="confirmDelete(informacion_usuario.id)"
-                                class="mt-9 bg-cyan-600 md:mr-2 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-blue-600 rounded-lg">
-                            Eliminar</Link>
+                            
                         </td>
                     </tr>
                 </tbody>
@@ -127,7 +133,7 @@ import { ref, computed, watch } from 'vue';
 
 
 const props = defineProps({
-    informacion_usuario: Object
+    cliente: Object
 })
 
 
@@ -135,7 +141,7 @@ const props = defineProps({
 const itemsPerPage = ref(8);
 const currentPage = ref(0);
 
-const totalPages = computed(() => Math.ceil(props.informacion_usuario.length / itemsPerPage.value));
+const totalPages = computed(() => Math.ceil(props.cliente.length / itemsPerPage.value));
 
 
 
@@ -163,7 +169,7 @@ watch(itemsPerPage, () => {
 const slicedInfoUsers = computed(() => {
     const start = currentPage.value * itemsPerPage.value;
     const end = start + itemsPerPage.value;
-    const filteredUsers = props.informacion_usuario.filter(infoUser =>
+    const filteredUsers = props.cliente.filter(infoUser =>
         infoUser.name.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
         infoUser.email.toLowerCase().includes(searchTerm.value.toLowerCase())
     );
@@ -174,7 +180,7 @@ const slicedInfoUsers = computed(() => {
 
 
 const confirmDelete = infoUserId => {
-    const usuarioEncontrado = props.informacion_usuario.find(usuario => usuario.id === infoUserId);
+    const usuarioEncontrado = props.cliente.find(usuario => usuario.id === infoUserId);
 
     if (confirm('¿Estás seguro de que desea eliminar la información del usuario ' + usuarioEncontrado.name)) {
         Inertia.delete(route('informacionUsuario.destroy', infoUserId));

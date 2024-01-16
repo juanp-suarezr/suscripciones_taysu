@@ -31,13 +31,11 @@
 
             </nav-link>
 
-            <!-- ROL ADMIN -->
-
-
+            <!-- SEPARADOR-->
             <SeparadorMenu v-if="$page.props.auth.user.id_rol != estudianteID && $page.props.auth.user.id_rol != monitorID">
                 Configuración</SeparadorMenu>
 
-            <!-- ROL ADMIN -->
+            <!-- GESTION SUSCRIP -->
             <nav-link
                 :href="route('aprobar.index')" :active="route().current('aprobar.index')" class="hover:bg-gray-200">
                 <i class="fa-regular fa-check-circle"></i>
@@ -45,24 +43,13 @@
             </nav-link>
 
             
-
-
-
-
-
             <!-- ROL ADMIN -->
-            <nav-link v-if="$page.props.auth.user.id_rol != estudianteID && $page.props.auth.user.id_rol != monitorID"
-                :href="route('users.index')" :active="route().current('users.index')" class="hover:bg-gray-200">
+            <nav-link
+                :href="route('infoclientes.index')" :active="route().current('informacionUsuario.index')" class="hover:bg-gray-200">
                 <i class="fa-solid fa-users-gear"></i>
-                Usuarios
+                Clientes
             </nav-link>
 
-            <!-- ROL ADMIN -->
-            <!-- <nav-link v-if="$page.props.auth.user.id_rol != estudianteID && $page.props.auth.user.id_rol != monitorID"
-                :href="route('cliente.index')" :active="route().current('cliente.index')" class="hover:bg-gray-200">
-                <i class="fa-solid fa-circle-info"></i>
-                Información usuarios
-            </nav-link> -->
 
 
         </nav>

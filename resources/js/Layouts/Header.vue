@@ -11,7 +11,29 @@
         </div>
 
         <div class="flex items-center">
-            <dropdown>
+            <!-- notificaciones -->
+            <dropdown class="mx-3">
+                <template #trigger>
+                    <button @click="dropdownOpen = !dropdownOpen" class="relative block overflow-hidden">
+                        <i class="fa-solid fa-bell"></i><sup> {{ notification.length }} </sup>
+                    </button>
+                </template>
+
+                <template #content>
+                    <div v-for="noti in notification" :key="noti.id" class="">
+
+                        <dropdown-link v-if="noti.noti == 'cumpleanos'" :href="route('cumpleaños')">
+                            Cumpleaños de {{ noti.nombre_mascota }}
+                        </dropdown-link>
+
+                    </div>
+
+
+
+                </template>
+            </dropdown>
+            <!-- perfil -->
+            <dropdown class="mx-3">
                 <template #trigger>
                     <button @click="dropdownOpen = !dropdownOpen" class="relative block overflow-hidden">
                         {{ $page.props.auth.user.name }} <i class="fa-solid fa-bars p-2"></i>
@@ -19,7 +41,8 @@
                 </template>
 
                 <template #content>
-                    <dropdown-link :href="route('profile.edit', { id: $page.props.auth.user.id, originPage: 'perfilEdit' })">
+                    <dropdown-link
+                        :href="route('profile.edit', { id: $page.props.auth.user.id, originPage: 'perfilEdit' })">
                         Perfil
                     </dropdown-link>
 
@@ -35,4 +58,57 @@
 <script setup>
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
+import { ref } from "vue";
+import { Head, usePage } from '@inertiajs/vue3';
+
+//ARRAY DE MANEJO DE NOTIFICACIONES
+const notification = ref([]);
+
+//DATOS DEL STORAGE
+const clientes = usePage().props.clientes;
+const suscripciones = usePage().props.suscripciones;
+
+
+//Para saber si cumpleaños es hoy
+const isBirthdayToday = (birthday) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Establecer la hora a 00:00:00 para ignorar la hora
+
+    const birthdayDate = new Date(`${birthday}T00:00:00-05:00`);
+    console.log(birthdayDate);
+    birthdayDate.setHours(0, 0, 0, 0);
+
+    return today.getMonth() === birthdayDate.getMonth() && today.getDate() === birthdayDate.getDate();
+};
+
+//ENVIAR NOTIFICACION SI EL CUMPLEAÑOS ES HOY
+if (clientes) {
+    clientes.forEach(element => {
+
+        console.log(element.cumpleanos_m);
+
+
+        if (isBirthdayToday(element.cumpleanos_m)) {
+            notification.value.push({
+                id: element.id,
+                noti: "cumpleanos",
+                name: element.name,
+                nombre_mascota: element.nombre_mascota,
+                cumpleanos_m: element.cumpleanos_m,
+                email: element.email,
+
+            });
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
 </script>

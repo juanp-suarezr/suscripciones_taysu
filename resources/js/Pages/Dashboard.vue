@@ -195,6 +195,8 @@ AOS.init();
 const clientes = usePage().props.clientes;
 const suscripciones = usePage().props.suscripciones;
 
+
+
 console.log(usePage().props);
 
 //SEARCH 

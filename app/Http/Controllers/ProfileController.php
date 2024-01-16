@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Cliente;
+use App\Models\User;
 use App\Models\Suscripciones;
-use App\Models\InformacionUsuario;
 use App\Mail\AprobadoNotificacion;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
@@ -33,9 +33,9 @@ class ProfileController extends Controller
             'originPage' => $originPage,
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'usersXAdmin' => User::where('id', $id)->paginate(),
-            'informacion_usuarioID' => InformacionUsuario::where('id_usuario', Auth::id())->paginate(),
-            'informacion_usuarioXAdmin' => InformacionUsuario::where('id_usuario', $id)->paginate(),
+            'clientes' => Cliente::where('id', $id)->where('estado', 'aprobado')->get(),
+            'informacion_usuarioID' => User::where('id', Auth::id())->get(),
+            
         ]);
     }
 

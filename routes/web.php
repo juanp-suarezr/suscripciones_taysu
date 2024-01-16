@@ -1,14 +1,9 @@
 <?php
 
-use App\Http\Controllers\InformacionUsuarioController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\materiasController;
-use App\Http\Controllers\agendarController;
 use App\Http\Controllers\disponibilidadController;
 use App\Http\Controllers\GestionClientesController;
-use App\Http\Controllers\calificarController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -65,9 +60,9 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     
-    Route::get('/cumpleaños', fn () => Inertia::render('Cumpleaños', ['users' => Cliente::where('estado', 'aprobado')->get()]))->name('cumpleaños');
+    Route::get('/cumpleaños', fn () => Inertia::render('Cumpleaños', ['clientes' => Cliente::where('estado', 'aprobado')->get()]))->name('cumpleaños');
     
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('infoclientes', [ClientesController::class, 'index'])->name('infoclientes.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -3,7 +3,7 @@
 
     <AuthenticatedLayout>
         <template #header>
-            Estudiantes
+            CUMPLEAÑOS MASCOTA
         </template>
 
 
@@ -62,7 +62,7 @@ const currentPage = ref(0);
 //Lista con fechas del mes
 const cumpleanosSegunMes = ref([]);
 
-const totalPages = computed(() => Math.ceil(usePage().props.users.length / itemsPerPage.value));
+const totalPages = computed(() => Math.ceil(usePage().props.clientes.length / itemsPerPage.value));
 
 
 
@@ -87,7 +87,7 @@ watch(itemsPerPage, () => {
 const searchTerm = ref('');
 
 
-usePage().props.users.forEach(element => {
+usePage().props.clientes.forEach(element => {
     if (new Date(element.cumpleanos_m).getMonth() + 1 == new Date().getMonth() + 1) {
 
         cumpleanosSegunMes.value.push(element);
