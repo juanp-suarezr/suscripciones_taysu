@@ -71,18 +71,20 @@
                             <p class="text-gray-900 whitespace-no-wrap">{{ user.telefono }}</p>
                         </td>
                         <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
-                            
-                                <p class="text-gray-900 whitespace-no-wrap">{{ user.identificacion }}</p>
-                            
+
+                            <p class="text-gray-900 whitespace-no-wrap">{{ user.identificacion }}</p>
+
                         </td>
                         <td class="border-b border-gray-200 bg-white sm:px-5 sm:py-5 p-2 sm:text-sm text-xs">
                             <Link @click="edit(user.id)"
-                                class="bg-cyan-600 md:mr-3 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg" v-if="user.estado != 'aprobado'">
+                                class="bg-cyan-600 md:mr-3 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg"
+                                v-if="user.estado != 'aprobado'">
                             Aprobar</Link>
 
-                            <Link @click="edit1(user.id)"
-                                class="bg-cyan-600 md:mr-3 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg" v-if="user.estado == 'aprobado'">
-                            Denegar</Link>
+                            <button @click="showModal(user.id)"
+                                class="bg-cyan-600 md:mr-3 text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg"
+                                v-if="user.estado == 'aprobado'">
+                            Denegar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -97,6 +99,46 @@
                     :disabled="currentPage === totalPages - 1"><i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
+
+
+        <!-- Modal para denegar registro -->
+        <Modal :show="DenegarReg" @close="closeModal" class="w-auto">
+            <header class="bg-gradient-to-r from-purple-400 via-purple-600 to-purple-800 flex">
+                <h2 class="text-lg md:text-2xl font-bold text-white py-6 text-center m-auto">
+                    Denegar registro
+                </h2>
+            </header>
+            <div class="p-6">
+
+
+                <form @submit.prevent="edit1">
+
+
+                    <div class="mt-5 w-full">
+                        <p class="mt-4 text-base md:text-xl text-gray-600 mb-2">
+                            Motivo por el que se da de baja la suscripción
+                        </p>
+                        <TextInput id="tema" type="tema" class="mt-1 block w-full" v-model="formEventElim.tema" required
+                            autofocus autocomplete="tema" />
+
+
+                    </div>
+
+
+
+
+                    <div class="mt-6 w-full flex">
+                        <PrimaryButton :disabled="formEventElim.processing" class="w-auto h-10 mx-auto">
+                            Denegar
+                        </PrimaryButton>
+                        <DangerButton @click="closeModal" class="w-auto h-10 mx-auto">
+                            Cancelar
+                        </DangerButton>
+                    </div>
+                </form>
+
+            </div>
+        </Modal>
 
 
 
@@ -114,6 +156,7 @@ import { ref, computed, watch } from 'vue';
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
+import Modal from '@/Components/Modal.vue';
 
 
 import { useToast } from 'vue-toast-notification';
@@ -177,8 +220,41 @@ const edit = userId => {
 
 }
 
-const edit1 = userId => {
-    Inertia.patch(route('profile.reprobar', userId));
+
+//DENEGAR REGISTRO
+//Form para DENEGAR registro
+const formEventElim = useForm({
+
+    id: "",
+    tema: "",
+
+});
+
+//MODAL
+//MODALES
+
+const DenegarReg = ref(false);
+
+const closeModal = () => {
+
+    DenegarReg.value = false;
+
+
+};
+
+const showModal = (id) => {
+
+    DenegarReg.value = true;
+    formEventElim.id = id;
+
+};
+
+
+const edit1 = () => {
+    formEventElim.post(route('profile.reprobar'), {
+        onFinish: () => window.location.reload(),
+    })
+
     let instance = $toast.open({
         message: `el suscriptor ha sido denegado por falta de pago`,
         type: 'warning',
@@ -187,7 +263,7 @@ const edit1 = userId => {
         pauseOnHover: true,
 
     });
-    
+
 }
 
 </script>

@@ -14,6 +14,7 @@ use App\Models\Cliente;
 use App\Models\User;
 use App\Models\Suscripciones;
 use App\Mail\AprobadoNotificacion;
+use App\Mail\DenegadoNotificacion;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -146,12 +147,15 @@ class ProfileController extends Controller
     }
 
     /** REPROBAR TUTOR 
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function reprobar($id): RedirectResponse
+    public function reprobar(Request $request): RedirectResponse
     {
 
+        $id = $request->input('id');
+        $motivo = $request->input('tema');
+        
         $user = Cliente::find($id);
 
         // Verificar que se encontró el usuario
@@ -165,7 +169,7 @@ class ProfileController extends Controller
         $user->save();
 
         
-        Mail::to($user->email)->send(new AprobadoNotificacion($user));
+        Mail::to($user->email)->send(new DenegadoNotificacion($user, $motivo));
         return redirect()->back()->with('success', 'Correo enviado con exito');
     }
 

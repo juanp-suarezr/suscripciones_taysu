@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
     <meta name="x-apple-disable-message-reformatting"> <!-- Disable auto-scale in iOS 10 Mail entirely -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-    <title>Notificación de aprobación de suscripción miembro Vip TAYSU</title>
+    <title>Notificación de baja de suscripción miembro Vip TAYSU, por {{$motivo}}</title>
 </head>
 
 <body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f1;">
@@ -33,9 +33,9 @@
                             <tr>
                                 <td>
                                     <div style="padding: 0 2.5em; text-align: justify;">
-                                        <h2><b>FELICITACIONES {{ $distressCall->name }}</b></h2>
-                                        <p style="font-size: medium;">Tu suscripcion ha sido aprobada, ahora eres miembro vip de la taysu familia, llena de amor y diversión</p>
-                                        <p style="font-size: small;">En aproximadamente 2 Semanas estara llegando tu mistery box o kit de bienvenida</p>
+                                        <h2><b>Lo sentimos -- {{ $distressCall->name }}</b></h2>
+                                        <p style="font-size: medium;">Tu suscripcion ha sido denegada, por {{$motivo}}</p>
+                                        <p style="font-size: small;">Comunicate con nosotros al 3054025529 para más información</p>
                                     </div>
                                 </td>
                             </tr>

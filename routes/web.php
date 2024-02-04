@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     //UPDATE ESTADO CLIENTE
     Route::patch('/aprobar/{id}', [ProfileController::class, 'change'])->name('profile.change');
     //REPROBAR ESTADO CLIENTE
-    Route::patch('/reprobar/{id}', [ProfileController::class, 'reprobar'])->name('profile.reprobar');
+    Route::post('/reprobar/', [ProfileController::class, 'reprobar'])->name('profile.reprobar');
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

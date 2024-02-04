@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AprobadoNotificacion;
 use App\Models\User;
 use App\Models\Roles;
 use App\Models\Cliente;
+use App\Models\Suscripciones;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
@@ -68,13 +72,13 @@ class RegisteredUserController extends Controller
             $fechaVencimiento = Carbon::now()->addYear();
 
         
-            $suscripcionNow = Suscripciones::where('id_cliente', $user->id)->first();
+            $suscripcionNow = Suscripciones::where('id_cliente', $cliente->id)->first();
         
 
             if (!$suscripcionNow) {
 
                 $suscripcion = Suscripciones::create([
-                    'id_cliente' => $user->id,
+                    'id_cliente' => $cliente->id,
                     'fecha_vencimiento' => $fechaVencimiento,
                     'precio' => 180000,
                 
@@ -83,7 +87,7 @@ class RegisteredUserController extends Controller
             } 
 
 
-            Mail::to($user->email)->send(new AprobadoNotificacion($user));
+            Mail::to($cliente->email)->send(new AprobadoNotificacion($cliente));
             return redirect()->back()->with('success', 'Correo enviado con exito');
 
         }
