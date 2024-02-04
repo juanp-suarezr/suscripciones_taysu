@@ -175,10 +175,6 @@ const edit = userId => {
 
     });
 
-    // setTimeout(() => {
-    //     // Redireccionar usando Inertia
-    //     window.location.reload();
-    // }, 2000);
 }
 
 const edit1 = userId => {
@@ -191,10 +187,7 @@ const edit1 = userId => {
         pauseOnHover: true,
 
     });
-    // setTimeout(() => {
-    //     // Redireccionar usando Inertia
-    //     window.location.reload();
-    // }, 2000);
+    
 }
 
 </script>

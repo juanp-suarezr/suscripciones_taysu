@@ -36,7 +36,10 @@ Route::get('/', function () {
         
 
     ]);
+    
 });
+
+
 
 Route::get('/dashboard', function () {
 

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-    <title>Notificación de aprobación de suscripción miembro Vip TAYSU</title>
+    <title>Feliz Cumpleaños</title>
 </head>
 <body>
     <p>Hola! {{ $distressCall->name }}.</p>
-    <p>Tu suscripcion ha sido aprobada, feliciataciones eres miembro vip de la taysu familia, llena de amor y diversión</p>
+    <p>{{ $distressCall->nombre_mascota }}Queremos desearte un muy feliz cumpleaños de parte de la Taysu Familia</p>
     
     
 </body>
