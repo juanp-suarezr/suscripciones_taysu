@@ -45,7 +45,7 @@
             
             <!-- ROL ADMIN -->
             <nav-link
-                :href="route('infoclientes.index')" :active="route().current('informacionUsuario.index')" class="hover:bg-gray-200">
+                :href="route('infoclientes.index')" :active="route().current('infoclientes.index')" class="hover:bg-gray-200">
                 <i class="fa-solid fa-users-gear"></i>
                 Clientes
             </nav-link>

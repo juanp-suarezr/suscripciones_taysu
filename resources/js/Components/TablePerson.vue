@@ -16,30 +16,39 @@
                 </p>
 
             </div>
+            <button @click="emitUserId(person.id)" class="text-white xs:text-xs sm:px-4 sm:py-2 p-2 bg-yellow-800 rounded-lg">
+                Enviar
+            </button>
         </li>
     </ul>
 </template>
   
 <script setup>
-
+import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
     users: Object
-})
+});
+
+const emits = defineEmits();
 
 const months = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
 ];
 
-const isBirthdayToday = (birthday) => {
+const isBirthdayToday = (person) => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Establecer la hora a 00:00:00 para ignorar la hora
+    today.setHours(0, 0, 0, 0);
 
-    const birthdayDate = new Date(`${birthday}T00:00:00-05:00`);
-    birthdayDate.setHours(0, 0, 0, 0); // Establecer la hora a 00:00:00 para ignorar la hora
+    const birthdayDate = new Date(`${person.cumpleanos_m}T00:00:00-05:00`);
+    birthdayDate.setHours(0, 0, 0, 0);
 
     return today.getMonth() === birthdayDate.getMonth() && today.getDate() === birthdayDate.getDate();
+};
+
+const emitUserId = (id) => {
+    emits('id', id);
 };
 
 

@@ -12,7 +12,7 @@
 <body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f1;">
     <center style="width: 100%;">
 
-        <div style="max-width: 600px; margin: 0 auto; background: white; height: 100vh; display: flex;">
+        <div style="max-width: 600px; margin: 0 auto; background: white; height: 100vh; display: flex; overflow-y: auto;">
             <!-- BEGIN BODY -->
             <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
                 <!-- Imagen ts -->

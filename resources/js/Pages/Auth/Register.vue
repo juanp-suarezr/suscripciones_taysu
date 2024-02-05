@@ -251,6 +251,7 @@ const precioEnUSD = ref();
 
 
 const loadPayPalScript = async () => {
+    
     try {
         const key = "d66d9b0aea44804cd610438bf25e7230b7328cb0";
         const precioCOP = 180000;
@@ -266,7 +267,8 @@ const loadPayPalScript = async () => {
 
         // Cargar el script de PayPal después de que se resuelva la petición Fetch
         const script = document.createElement('script');
-        const clientID = "AS6a9o5E4iay_fW-DBdyEOZhB7MgVTTDwa6mPib1oTS2ObXg4UL8744OR2L0Z-7GzxG7bISWf5_3W8SA";
+        //CAMBIAR CADA VEZ DEL RUN BUILD
+        const clientID = usePage().props.paypal_token;
         console.log(precioEnUSD.value + " " + typeof (precioEnUSD.value));
         script.src = `https://www.paypal.com/sdk/js?client-id=${clientID}&currency=USD`;
         script.onload = () => {

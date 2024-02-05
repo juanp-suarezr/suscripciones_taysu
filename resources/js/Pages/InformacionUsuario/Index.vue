@@ -3,7 +3,7 @@
 
     <AuthenticatedLayout>
         <template #header>
-            Informacion usuarios
+            Informacion Clientes
         </template>
 
         <div class="mb-4 inline-flex w-full overflow-hidden rounded-lg bg-white shadow-md">
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="md:inline-block min-w-full overflow-x-scroll sm:overflow-x-scroll md:overflow-x-auto rounded-lg shadow">
+        <div class="md:inline-block min-w-full overflow-x-scroll rounded-lg shadow">
             <table class="w-full whitespace-no-wrap overflow-x-auto">
                 <thead>
                     <tr class="border-b bg-gray-50 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">

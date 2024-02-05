@@ -30,7 +30,7 @@ class Felizcumpleanos extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Cumpleaños Notificación',
+            subject: 'Feliz Cumpleaños para '. $this->distressCall->nombre_mascota,
         );
     }
 

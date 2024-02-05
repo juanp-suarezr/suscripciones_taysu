@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Suscripciones;
 use App\Mail\AprobadoNotificacion;
 use App\Mail\DenegadoNotificacion;
+use App\Mail\FelizCumpleanos;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -144,6 +145,29 @@ class ProfileController extends Controller
         Mail::to($user->email)->send(new AprobadoNotificacion($user));
         return redirect()->back()->with('success', 'Correo enviado con exito');
 
+    }
+
+    /** ENVIAR CUMPLEAÑOS
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function cumpleaños(Request $request): RedirectResponse
+    {
+
+        $id = $request->input('id');
+        
+        
+        $user = Cliente::find($id);
+
+        // Verificar que se encontró el usuario
+        if (!$user) {
+            // Manejar el caso donde el usuario no se encuentra
+            return redirect()->back()->with('error', 'Usuario no encontrado');
+        }
+
+    
+        Mail::to($user->email)->send(new FelizCumpleanos($user));
+        return redirect()->back()->with('success', 'Correo enviado con exito');
     }
 
     /** REPROBAR TUTOR 

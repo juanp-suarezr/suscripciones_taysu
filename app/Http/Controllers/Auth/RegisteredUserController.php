@@ -28,8 +28,10 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
+        
         return Inertia::render('Auth/Register', [
             'clientes' => Cliente::all(),
+            'paypal_token' => env('PAYPAL_TOKEN'),
         ]);
     }
 
@@ -85,7 +87,6 @@ class RegisteredUserController extends Controller
                 ]);
 
             } 
-
 
             Mail::to($cliente->email)->send(new AprobadoNotificacion($cliente));
             return redirect()->back()->with('success', 'Correo enviado con exito');

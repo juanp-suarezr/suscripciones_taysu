@@ -75,6 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/aprobar/{id}', [ProfileController::class, 'change'])->name('profile.change');
     //REPROBAR ESTADO CLIENTE
     Route::post('/reprobar/', [ProfileController::class, 'reprobar'])->name('profile.reprobar');
+    //ENVIAR CORREO CUMPLEAÑOS
+    Route::post('/cumpleaños/', [ProfileController::class, 'cumpleaños'])->name('profile.cumpleaños');
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
